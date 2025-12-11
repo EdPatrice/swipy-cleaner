@@ -13,8 +13,11 @@ interface VirtualFolderDao {
     @Query("SELECT * FROM virtual_folders")
     fun getAll(): Flow<List<VirtualFolder>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(folder: VirtualFolder): Long
+
+    @Query("SELECT * FROM virtual_folders WHERE name = :name AND filterType = :filterType AND filterValue = :filterValue LIMIT 1")
+    suspend fun getFolder(name: String, filterType: com.example.glassmedia.core.model.FilterType, filterValue: String): VirtualFolder?
 
     @Update
     suspend fun update(folder: VirtualFolder)

@@ -4,7 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.glassmedia.core.model.FilterType
 
-@Entity(tableName = "virtual_folders")
+import androidx.room.Index
+
+@Entity(
+    tableName = "virtual_folders",
+    indices = [Index(value = ["name", "filterType", "filterValue"], unique = true)]
+)
 data class VirtualFolder(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val name: String,
