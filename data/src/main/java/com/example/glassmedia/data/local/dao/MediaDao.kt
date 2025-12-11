@@ -13,12 +13,12 @@ interface MediaDao {
     @Query("SELECT * FROM media_items WHERE virtualFolderId = :vfId ORDER BY dateTaken DESC")
     fun streamByVirtualFolder(vfId: Long): Flow<List<MediaItem>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(items: List<MediaItem>)
 
     @Update
     suspend fun update(item: MediaItem)
 
-    @Query("SELECT * FROM media_items WHERE id = :id")
-    suspend fun getById(id: Long): MediaItem?
+    @Query("SELECT * FROM media_items WHERE uri = :uri LIMIT 1")
+    suspend fun getMediaItemByUri(uri: String): MediaItem?
 }

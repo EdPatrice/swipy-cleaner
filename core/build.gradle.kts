@@ -11,6 +11,8 @@ android {
 
     defaultConfig {
         minSdk = 26
+        // targetSdk removed for library modules as per AGP warning/best practice
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -33,7 +35,9 @@ android {
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("com.google.dagger:hilt-android:2.50")
-    ksp("com.google.dagger:hilt-compiler:2.50")
-    implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
+
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

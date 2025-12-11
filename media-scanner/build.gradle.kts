@@ -11,6 +11,8 @@ android {
 
     defaultConfig {
         minSdk = 26
+        // targetSdk removed for library modules
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -33,8 +35,10 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":data"))
+
     implementation("androidx.core:core-ktx:1.12.0")
+
+    // Hilt
     implementation("com.google.dagger:hilt-android:2.50")
-    ksp("com.google.dagger:hilt-compiler:2.50")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
 }
