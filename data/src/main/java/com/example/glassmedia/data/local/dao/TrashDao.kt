@@ -6,13 +6,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.glassmedia.data.local.entity.TrashItem
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrashDao {
-    @Query("SELECT * FROM trash_items ORDER BY deletedAt DESC")
-    fun getAll(): Flow<List<TrashItem>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: TrashItem)
 
@@ -21,4 +17,7 @@ interface TrashDao {
 
     @Query("SELECT * FROM trash_items WHERE expiryAt < :timestamp")
     suspend fun getExpiredItems(timestamp: Long): List<TrashItem>
+
+    @Query("SELECT * FROM trash_items")
+    suspend fun getAll(): List<TrashItem>
 }
