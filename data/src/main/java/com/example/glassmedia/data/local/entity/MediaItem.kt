@@ -1,11 +1,12 @@
 package com.example.glassmedia.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.glassmedia.core.model.MediaType
 import com.example.glassmedia.core.model.ReviewedState
 
-@Entity(tableName = "media_items")
+@Entity(tableName = "media_items", indices = [Index(value = ["uri"], unique = true)])
 data class MediaItem(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val uri: String,
