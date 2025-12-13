@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface VirtualFolderDao {
-    @Query("SELECT * FROM virtual_folders ORDER BY name ASC")
+    @Query("SELECT * FROM virtual_folders")
     fun getAll(): Flow<List<VirtualFolder>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(folder: VirtualFolder): Long
+    suspend fun insert(folder: VirtualFolder)
 
     @Update
     suspend fun update(folder: VirtualFolder)
